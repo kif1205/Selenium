@@ -5,7 +5,15 @@ from Web_APIs import *
 #    XPath can be "//input[@formcontrolname='kvmEnabled']"
 # 2. Copy Xpath => "/html/body/app-root/div/div/div[2]/app-remotecontrol/div/div[2]/div/div[2]/app-vconsole/div/div[2]/form/div[1]/div/input"
 #    XPath can be //app-remotecontrol//app-vconsole//div[2]/form/div[1]//input
-
+#
+# 3. XPath examples :  //div[contains(@class, 'accordion-group')] => div is the function name before class like this "<div class="pt-2">" => function name is "div"
+#                      <input disabled="" type="radio" id="rdoUploadType2bmc" class="ng-untouched ng-pristine"> => function name is "input"
+#    XPath_TFTP_Button = "//*[contains(@class, 'accordion-group')]//*[contains(@class,'form ng-valid ng-dirty ng-touched')]//*[contains(@class,'scheduler-border')]//*[contains(@class,'btn btn-vertiv')]"
+#    XPath_TFTP_Button = "//app-accordion//app-firmware-inventory/form/div/div[4]/fieldset/div/div/div[2]/button"
+     
+#    XPath_TFTP_Button = "//div[contains(@class, 'accordion-group')]//fieldset[contains(@class,'scheduler-border')]//button[contains(@class,'btn btn-vertiv')]"
+#    XPath_TFTP_Button = "//div[@class='accordion-group']//fieldset[@class='scheduler-border']//button[@class='btn btn-vertiv']"
+    
 Web_Type = "Chrome"
 Web_Connect_Type = "https"
 Web_IP = "10.162.246.133"
@@ -28,19 +36,19 @@ def main():
 
     Web_Open()
 
-    # # Input Account Name
-    # Web_Test.locate("/html/body/app-root/div/div/div/app-login/div/div/div/div/form/div[2]/input[1]")
-    # Web_Test.textbox_set("admin")
-    # 
-    # # Input Account Password
-    # Web_Test.locate("/html/body/app-root/div/div/div/app-login/div/div/div/div/form/div[2]/input[2]")
-    # Web_Test.textbox_set("Password1")
-    # delays(3)
-    # 
-    # # Click Login Button
-    # Web_Test.locate("/html/body/app-root/div/div/div/app-login/div/div/div/div/form/button")
-    # Web_Test.click_button()
-    # delays(5)
+    # Input Account Name
+    Web_Test.locate("/html/body/app-root/div/div/div/app-login/div/div/div/div/form/div[2]/input[1]")
+    Web_Test.textbox_set("admin")
+    
+    # Input Account Password
+    Web_Test.locate("/html/body/app-root/div/div/div/app-login/div/div/div/div/form/div[2]/input[2]")
+    Web_Test.textbox_set("Password1")
+    delays(3)
+    
+    # Click Login Button
+    Web_Test.locate("/html/body/app-root/div/div/div/app-login/div/div/div/div/form/button")
+    Web_Test.click_button()
+    delays(5)
 
     # #######################
     # # Change KVM Settings #
@@ -116,8 +124,6 @@ def main():
     # 
     # VM_Menu = VM_Menu.split("\n")
     # print(VM_Menu)
-    
-    
     # 
     # # Close KVM Viewer
     # Web_Test.close_window(1) 
@@ -180,9 +186,32 @@ def main():
     # Web_Test.click_button()
     # delays(3)     
     
-    
+    # ##############################
+    # # Firmware Update management #
+    # ##############################
+    # # Switch to Firmware tab
+    # Web_Test.locate("/html/body/app-root/div/div/div[1]/app-sidenav/div/ul/li[7]/a")
+    # Web_Test.click_button()
+    # delays(3)
+    # 
+    # Web_Test.locate("//input[@name='txtTFTPPath']")
+    # Web_Test.textbox_clear()
+    # delays(3)
+    # 
+    # Web_Test.locate("//input[@name='txtTFTPPath']")
+    # Web_Test.textbox_set("tftp://1.1.1.1")
+    # delays(3)
+    # 
+    # Web_Test.locate("//div[@class='accordion-group']//fieldset[@class='scheduler-border']//button[@class='btn btn-vertiv']")
+    # Web_Test.click_button()
+    # delays(3)    
+    # 
+    # Web_Test.locate("//div[contains(@class, 'accordion-group')]//fieldset[contains(@class,'scheduler-border')]//div[contains(@class,'col-md-6')]//div[contains(@class,'font-italic font-weight-bold')]")
+    # test = Web_Test.label_get()
+    # delays(3)  
+    # print(test)
+    # 
     #Web_Test.refresh()
     #Web_Close()
 if __name__ == "__main__":
     main()
-
