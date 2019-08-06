@@ -43,13 +43,13 @@ def main():
     # Input Account Password
     Web_Test.locate("/html/body/app-root/div/div/div/app-login/div/div/div/div/form/div[2]/input[2]")
     Web_Test.textbox_set("Password1")
-    delays(3)
+    #delays(3)
     
     # Click Login Button
     Web_Test.locate("/html/body/app-root/div/div/div/app-login/div/div/div/div/form/button")
     Web_Test.click_button()
-    delays(5)
-
+    #delays(5)
+    
     # #######################
     # # Change KVM Settings #
     # #######################
@@ -186,30 +186,30 @@ def main():
     # Web_Test.click_button()
     # delays(3)     
     
-    # ##############################
-    # # Firmware Update management #
-    # ##############################
-    # # Switch to Firmware tab
-    # Web_Test.locate("/html/body/app-root/div/div/div[1]/app-sidenav/div/ul/li[7]/a")
-    # Web_Test.click_button()
-    # delays(3)
+    ##############################
+    # Firmware Update management #
+    ##############################
+    # Switch to Firmware tab
+    Web_Test.locate("//app-sidenav/div/ul/li[7]/a")
+    Web_Test.click_button()
+    #delays(3)
+    
+    Web_Test.locate("//input[@name='txtTFTPPath']")
+    Web_Test.textbox_clear()
+    #delays(3)
+    
+    Web_Test.locate("//input[@name='txtTFTPPath']")
+    Web_Test.textbox_set("tftp://1.1.1.1")
+    #delays(3)
+    
+    Web_Test.locate("//div[@class='accordion-group']//fieldset[@class='scheduler-border']//button[@class='btn btn-vertiv']")
+    Web_Test.click_button()
+    #delays(3)    
     # 
-    # Web_Test.locate("//input[@name='txtTFTPPath']")
-    # Web_Test.textbox_clear()
-    # delays(3)
-    # 
-    # Web_Test.locate("//input[@name='txtTFTPPath']")
-    # Web_Test.textbox_set("tftp://1.1.1.1")
-    # delays(3)
-    # 
-    # Web_Test.locate("//div[@class='accordion-group']//fieldset[@class='scheduler-border']//button[@class='btn btn-vertiv']")
-    # Web_Test.click_button()
-    # delays(3)    
-    # 
-    # Web_Test.locate("//div[contains(@class, 'accordion-group')]//fieldset[contains(@class,'scheduler-border')]//div[contains(@class,'col-md-6')]//div[contains(@class,'font-italic font-weight-bold')]")
-    # test = Web_Test.label_get()
-    # delays(3)  
-    # print(test)
+    Web_Test.locate("//div[contains(@class, 'accordion-group')]//fieldset[contains(@class,'scheduler-border')]//div[contains(@class,'col-md-6')]//div[contains(@class,'font-italic font-weight-bold')]")
+    test = Web_Test.label_get()
+    # #delays(3)  
+    print(test)
     # 
     #Web_Test.refresh()
     #Web_Close()

@@ -2,6 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select # For dropdown_set()
 from selenium.webdriver.common.action_chains import ActionChains # For move_cursor_onto()
 
+from selenium.webdriver.common.by import By # For WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait # For WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC # For WebDriverWait
+
 import time
 
 #def Web_Open(): ok
@@ -28,7 +32,7 @@ import time
 class WebConnection():
 
     driver = webdriver.Chrome("drivers\chromedriver.exe")
-
+   
     def settings(self, type , ip , username , password , port):
 
         self.type = type
@@ -62,9 +66,16 @@ class WebConnection():
     # driver.find_element_by_xpath(xpath)
     def locate(self,xpath):
         try:
-            self.inputElement = self.driver.find_element_by_xpath(xpath)
-			#return self.inputElement
+            self.wait_loading_state()
+            if self.loading_state:
+                self.inputElement = self.driver.find_element_by_xpath(xpath) #Without wait time
+            # if isButton:
+            #     self.inputElement = self.wait.until(EC.element_to_be_clickable((By.XPATH, xpath)))
+            # else:
+            #     self.inputElement = self.wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
+            #return self.inputElement
         except Exception as error:
+            print("###### Error occurs ######")
             print(error)
 
     # Frame_locate = driver.find_element_by_xpath(frame_xpath)
@@ -225,7 +236,18 @@ class WebConnection():
             self.a1.accept()
         except Exception as error:
             print(error)
-			
+
+    # For Blueplate project , wait the loading icon disappears
+    def wait_loading_state(self):
+        try:
+            self.wait = WebDriverWait(self.driver,10)
+            self.loading_state = self.wait.until(EC.invisibility_of_element_located((By.ID, "loading")))
+            delays(1)
+            print(self.loading_state)
+        except Exception as error:
+            print(error)    
+    
+    
 def delays(seconds, reason = ""):
     if seconds > 3:
         if reason == "":
@@ -242,4 +264,3 @@ def delays(seconds, reason = ""):
         print("")
     else:
         time.sleep(seconds)
-
