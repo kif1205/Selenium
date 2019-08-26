@@ -216,7 +216,7 @@ class WebConnection():
             return self.inputElement.get_attribute(attribute)
         except Exception as error:
             print(error)
-
+            
     # Alert has no xpath 
 	# a1 = driver.switch_to.alert
 	# return a1.text

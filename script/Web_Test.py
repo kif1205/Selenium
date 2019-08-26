@@ -49,10 +49,10 @@ def Web_Login():
     delays(5)
 
 def case1():
-    # ###################
-    # # Get LED's Color #
-    # ###################
-    # # Switch to Virtual Console tab
+    ###################
+    # Get LED's Color #
+    ###################
+    # Switch to Virtual Console tab
     Web_Test.locate('//app-sidenav//li[8]/a')
     Web_Test.click_button()
     delays(3)
@@ -66,6 +66,25 @@ def case1():
     Web_Test.locate('/html/body/app-root/div/div/div[2]/app-remotecontrol/div/div[2]/div/div[1]/div/div[2]/div[1]/div[2]/app-toggleswitch/div/label[1]')
     test = Web_Test.get_css_property('background-color')
     print(test)
+
+def case2():
+    #########################
+    # Get Toggle State Test #
+    #########################
+    # Switch to Power Management Tab
+    Web_Test.locate('//app-sidenav//li[6]/a')
+    Web_Test.click_button()
+    delays(3)
+    
+    Web_Test.locate('//app-power//app-accordion//app-accordion-group[1]/div')
+    test = Web_Test.get_single_attribute("class")
+    print(test)
+    # result : accordion-group => it means the tab is expaned
+    
+    Web_Test.locate('//app-power//app-accordion//app-accordion-group[2]/div')
+    test = Web_Test.get_single_attribute("class")
+    print(test)
+    # result : accordion-group closed => it means the tab is hided
     
 def main():
 
@@ -238,6 +257,6 @@ def main():
     
 if __name__ == "__main__":
     main()
-    case1()
+    case2()
     #Web_Close()
     
