@@ -7,27 +7,41 @@ from selenium.webdriver.support.ui import WebDriverWait # For WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC # For WebDriverWait
 
 import time
+###### Done features ####
+# settings              : Import Settings 
+# open                  : Open a browser 
+# close                 : Close a browser 
+# refresh               : Refresh(F5) a browser 
+# locate                : Find the locate element , current only supports XPATH 
+# locate_frame          : Find the locate element of the Frame
+# label_get             : Get a Label string 
+# textbox_set           : Input to a textbox 
+# textbox_get           : Get the content of a textbox 
+# textbox_clear         : Clear a textbox 
+# click_button          : Click a button 
+# get_button_state      : Get a button's state
+# dropdown_set          : Set a dropdown menu
+# dropdown_get          : Get a dropdown menu 
+# checkbox_click        : Click a checkbox 
+# checkbox_get          : Get a checkbox's state 
+# switch_window         : Switch a window 
+# close_window          : Close a selected window 
+# get_window_title      : Get a selected window's title 
+# move_cursor_onto      : Move mouse cursor onto a selected location 
+# get_single_attribute  : Get the single attribute 
+# get_alert_message     : Get a alert window's message 
+# accept_alert_message  : To accept a alert window 
+# dismiss_alert_message : To dismiss a alert window 
+# input_alert_message   : Input some words to a alert window 
+# wait_loading_state    : 
+# get_css_property      : Get the selected element's css property 
 
-#def Web_Open(): ok
-#def Web_Close(): ok
-#def Web_Get_Label(): ok
-#def Web_Set_TextBox(): ok
-#def Web_Get_TextBox(): ok
-#def Web_Clear_TextBox(): ok
-#def Web_Set_DropdownMenu(): ok
-#def Web_Get_DropdownMenu(): ok
-#def Web_Set_CheckBox(): ok 
-#def Web_Get_CheckBox_State(): ok 
-#def Web_Set_RadioButton():
-#def Web_Get_RadioButton():
-#def Web_Set_Button(): ok
-#def Web_Get_Button_State(): ok
-#def Web_Dialog() : 
-#def Web_Swtich_page() : ok
-#def Web_Refresh() : ok
-#def Web_Get_Color() : 
-#def Web_Get_Expand_Accordion_Tab_State() : 
-#def Web_Move_Cursor_Onto() : ok 
+###### Future features ########### 
+# radiobutton_set                :
+# radiobutton_get                : 
+# dialog                         : 
+# get_expand_accordion_tab_state : 
+
 
 class WebConnection():
 
@@ -247,6 +261,12 @@ class WebConnection():
         except Exception as error:
             print(error)    
     
+    # Refer to https://www.w3schools.com/cssref/ to select the css property
+    def get_css_property(self,property_name):
+        try:
+            return self.inputElement.value_of_css_property(property_name)
+        except Exception as error:
+            print(error)
     
 def delays(seconds, reason = ""):
     if seconds > 3:

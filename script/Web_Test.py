@@ -16,7 +16,7 @@ from Web_APIs import *
     
 Web_Type = "Chrome"
 Web_Connect_Type = "https"
-Web_IP = "10.162.246.133"
+Web_IP = "10.162.247.83"
 Web_Account = "admin"
 Web_Password = "Password1"
 Web_Port = "8080"
@@ -32,23 +32,45 @@ def Web_Open():
 def Web_Close():
     Web_Test.close()
 
-def main():
-
-    Web_Open()
+def Web_Login():
 
     # Input Account Name
-    Web_Test.locate("/html/body/app-root/div/div/div/app-login/div/div/div/div/form/div[2]/input[1]")
+    Web_Test.locate('//input[@name="username"]')
     Web_Test.textbox_set("admin")
     
     # Input Account Password
-    Web_Test.locate("/html/body/app-root/div/div/div/app-login/div/div/div/div/form/div[2]/input[2]")
+    Web_Test.locate('//input[@name="password"]')
     Web_Test.textbox_set("Password1")
     #delays(3)
     
     # Click Login Button
-    Web_Test.locate("/html/body/app-root/div/div/div/app-login/div/div/div/div/form/button")
+    Web_Test.locate('//button[@type="submit"]')
     Web_Test.click_button()
-    #delays(5)
+    delays(5)
+
+def case1():
+    # ###################
+    # # Get LED's Color #
+    # ###################
+    # # Switch to Virtual Console tab
+    Web_Test.locate('//app-sidenav//li[8]/a')
+    Web_Test.click_button()
+    delays(3)
+    
+    # LED LIT Color
+    Web_Test.locate('/html/body/app-root/div/div/div[2]/app-remotecontrol/div/div[2]/div/div[1]/div/div[2]/div[1]/div[2]/app-toggleswitch/div/label[2]')    
+    test = Web_Test.get_css_property('background-color')
+    print(test)
+    
+    # LED OFF Color
+    Web_Test.locate('/html/body/app-root/div/div/div[2]/app-remotecontrol/div/div[2]/div/div[1]/div/div[2]/div[1]/div[2]/app-toggleswitch/div/label[1]')
+    test = Web_Test.get_css_property('background-color')
+    print(test)
+    
+def main():
+
+    Web_Open()
+    Web_Login()
     
     # #######################
     # # Change KVM Settings #
@@ -186,32 +208,36 @@ def main():
     # Web_Test.click_button()
     # delays(3)     
     
-    ##############################
-    # Firmware Update management #
-    ##############################
-    # Switch to Firmware tab
-    Web_Test.locate("//app-sidenav/div/ul/li[7]/a")
-    Web_Test.click_button()
-    #delays(3)
-    
-    Web_Test.locate("//input[@name='txtTFTPPath']")
-    Web_Test.textbox_clear()
-    #delays(3)
-    
-    Web_Test.locate("//input[@name='txtTFTPPath']")
-    Web_Test.textbox_set("tftp://1.1.1.1")
-    #delays(3)
-    
-    Web_Test.locate("//div[@class='accordion-group']//fieldset[@class='scheduler-border']//button[@class='btn btn-vertiv']")
-    Web_Test.click_button()
-    #delays(3)    
+    # ##############################
+    # # Firmware Update management #
+    # ##############################
+    # # Switch to Firmware tab
+    # Web_Test.locate("//app-sidenav/div/ul/li[7]/a")
+    # Web_Test.click_button()
+    # #delays(3)
     # 
-    Web_Test.locate("//div[contains(@class, 'accordion-group')]//fieldset[contains(@class,'scheduler-border')]//div[contains(@class,'col-md-6')]//div[contains(@class,'font-italic font-weight-bold')]")
-    test = Web_Test.label_get()
-    # #delays(3)  
-    print(test)
+    # Web_Test.locate("//input[@name='txtTFTPPath']")
+    # Web_Test.textbox_clear()
+    # #delays(3)
+    # 
+    # Web_Test.locate("//input[@name='txtTFTPPath']")
+    # Web_Test.textbox_set("tftp://1.1.1.1")
+    # #delays(3)
+    # 
+    # Web_Test.locate("//div[@class='accordion-group']//fieldset[@class='scheduler-border']//button[@class='btn btn-vertiv']")
+    # Web_Test.click_button()
+    # #delays(3)    
+    # # 
+    # Web_Test.locate("//div[contains(@class, 'accordion-group')]//fieldset[contains(@class,'scheduler-border')]//div[contains(@class,'col-md-6')]//div[contains(@class,'font-italic font-weight-bold')]")
+    # test = Web_Test.label_get()
+    # # #delays(3)  
+    # print(test)
     # 
     #Web_Test.refresh()
     #Web_Close()
+    
 if __name__ == "__main__":
     main()
+    case1()
+    #Web_Close()
+    
