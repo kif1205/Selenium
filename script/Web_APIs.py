@@ -35,6 +35,7 @@ import time
 # input_alert_message   : Input some words to a alert window 
 # wait_loading_state    : 
 # get_css_property      : Get the selected element's css property 
+# get_table             : Return a table
 
 ###### Future features ########### 
 # radiobutton_set                :
