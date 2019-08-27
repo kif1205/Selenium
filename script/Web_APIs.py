@@ -54,7 +54,11 @@ class WebConnection():
         self.username = username
         self.password = password
         self.port = port
-        self.get_url = type + "://" + ip + ":" + port
+        
+        if self.port == "":
+            self.get_url = type + "://" + ip
+        else:
+            self.get_url = type + "://" + ip + ":" + port
 
     # driver.get(url)
     def open(self):
@@ -267,7 +271,33 @@ class WebConnection():
             return self.inputElement.value_of_css_property(property_name)
         except Exception as error:
             print(error)
-    
+
+    def send_keys(self,keys):
+        try:
+            self.inputElement.send_keys(keys)
+        except Exception as error:
+            print(error)
+
+    def get_table(self):
+        try:
+            rows = self.inputElement.find_elements_by_tag_name("tr")
+            		#Print data from each row
+                    
+            Table_data = []
+            for row in rows:
+                cols = row.find_elements_by_tag_name("td")
+
+                line = []
+                for col in cols:
+                    line.append(col.text)
+                #print("\t".join(line))
+                Table_data.append(line)
+            return Table_data 
+                
+        except Exception as error:
+            print(error)    
+
+            
 def delays(seconds, reason = ""):
     if seconds > 3:
         if reason == "":
